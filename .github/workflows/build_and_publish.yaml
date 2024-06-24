@@ -29,7 +29,7 @@ jobs:
       matrix:
         include:
           - dockerfile: ./Dockerfile
-            image: ghcr.io/${{ github.repository }}/kg_dashboard
+            image: ghcr.io/${{ github.repository }}/amrkg
     permissions:
       packages: write
       contents: read
