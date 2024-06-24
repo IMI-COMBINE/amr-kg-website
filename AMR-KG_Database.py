@@ -86,8 +86,7 @@ st.header(
     divider="orange",
     help="Stats on the underlying data.",
 )
-DATA_DIR = "../data"
-df = pd.read_csv(f"{DATA_DIR}/processed/combined_bioassay_data.tsv", sep="\t")
+df = pd.read_csv("data/processed/combined_bioassay_data.tsv", sep="\t")
 
 
 def get_base_stats():

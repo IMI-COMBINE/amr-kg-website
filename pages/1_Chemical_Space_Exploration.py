@@ -53,7 +53,7 @@ st.write(
     You can zoom in, pan, and hover over the points to view the compound structure."""
 )
 
-HtmlFile = open("./amrkg_chemspace.html", "r", encoding="utf-8")
+HtmlFile = open("amrkg_chemspace.html", "r", encoding="utf-8")
 source_code = HtmlFile.read()
 components.html(source_code, height=500, scrolling=True)
 
@@ -69,8 +69,7 @@ st.header(
     help="Look for sub-structures in the database based in InChI keys.",
 )
 
-DATA_DIR = "../data"
-df = pd.read_csv(f"{DATA_DIR}/processed/combined_bioassay_data.tsv", sep="\t")
+df = pd.read_csv("data/processed/combined_bioassay_data.tsv", sep="\t")
 df["scaffold_inchikey"] = df["compound_inchikey"].str.split("-").str[0]
 
 user_smiles = st.text_input(
