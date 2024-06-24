@@ -1,0 +1,6 @@
+pandas
+rdkit
+mhfp==1.9.6
+seaborn==0.13.1
+torch
+streamlit==1.36.0
