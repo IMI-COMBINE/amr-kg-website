@@ -53,7 +53,7 @@ st.write(
     You can zoom in, pan, and hover over the points to view the compound structure."""
 )
 
-HtmlFile = open("../figures/amrkg_chemspace.html", "r", encoding="utf-8")
+HtmlFile = open("./amrkg_chemspace.html", "r", encoding="utf-8")
 source_code = HtmlFile.read()
 components.html(source_code, height=500, scrolling=True)
 
