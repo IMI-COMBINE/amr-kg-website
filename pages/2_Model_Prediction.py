@@ -119,6 +119,10 @@ if st.button("Predict"):
     else:
         smiles_df = pd.DataFrame(text_input.split("\n"), columns=["smiles"])
 
+    if smiles_df.empty:
+        st.write("No SMILES provided.")
+        st.stop()
+
     if fingerprint == "MHFP6":
         fingerprint_name = "mhfp6"
     elif fingerprint == "ECFP4":
@@ -192,6 +196,10 @@ if st.button("Predict"):
     smiles_df_subset = smiles_df.dropna(subset=[fingerprint_name])[
         ["smiles", fingerprint_name]
     ]
+
+    if smiles_df.empty:
+        st.write("No SMILES provided.")
+        st.stop()
 
     predictions = model.predict(smiles_df_subset[fingerprint_name].tolist())
     prediction_proba = model.predict_proba(smiles_df_subset[fingerprint_name].tolist())
