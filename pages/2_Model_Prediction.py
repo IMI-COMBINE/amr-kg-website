@@ -10,10 +10,7 @@ from rdkit.Chem import (
     MolFromSmiles,
     rdFingerprintGenerator,
     MACCSkeys,
-    Descriptors,
-    rdMolDescriptors,
     rdReducedGraphs,
-    GraphDescriptors,
 )
 from mhfp.encoder import MHFPEncoder
 import seaborn as sns

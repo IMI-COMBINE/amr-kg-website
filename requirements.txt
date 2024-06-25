@@ -1,5 +1,6 @@
-pandas
-rdkit
+numpy==1.25.2
+pandas==1.5.3
+rdkit==2023.9.3
 mhfp==1.9.6
 seaborn==0.13.1
 streamlit==1.36.0
