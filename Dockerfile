@@ -22,6 +22,7 @@ COPY requirements.txt $HOME/kg/requirements.txt
 COPY pages $HOME/kg/pages/
 COPY AMR-KG_Database.py $HOME/kg/AMR-KG_Database.py
 COPY data $HOME/kg/data/
+COPY amrkg_chemspace.html $HOME/kg/amrkg_chemspace.html
 COPY start-script.sh $HOME/kg/start-script.sh
 RUN mkdir $HOME/kg/models
 
@@ -40,5 +41,7 @@ RUN pip install --no-cache-dir -r requirements.txt \
 
 USER $USER
 EXPOSE 8501
+
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
 ENTRYPOINT ["./start-script.sh"]
