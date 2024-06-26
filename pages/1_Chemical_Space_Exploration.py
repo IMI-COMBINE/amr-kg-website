@@ -88,7 +88,7 @@ st.markdown(
     \n Generated Scaffold - :green[{scaffold_inchikey}]**"
 )
 
-df_scaffold = df[df["scaffold_inchikey"] == "PNUZDKCDAWUEGK"]
+df_scaffold = df[df["scaffold_inchikey"] == scaffold_inchikey]
 if df_scaffold.empty:
     st.write("**No compounds with this scaffold in the database.**")
 else:
