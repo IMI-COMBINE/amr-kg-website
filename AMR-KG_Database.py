@@ -10,6 +10,25 @@ st.set_page_config(
     initial_sidebar_state="auto",
 )
 
+# Customize sidebar
+markdown = """
+**Info**: This is AMR-KG repository and the broad-spectrum prediction models trained on the datasets. 
+This work was done under the IMI project COMBINE.
+
+**Developers**:
+* [Yojana Gadiya](https://orcid.org/0000-0002-7683-0452)
+* [Andrea Zaliani](https://orcid.org/0000-0002-1740-8390)
+* [Philip Gribbon](https://orcid.org/0000-0001-7655-2459)
+
+**External links**:
+* [GitHub](https://github.com/IMI-COMBINE/broad_spectrum_prediction)
+* [Website](https://www.itmp.fraunhofer.de/)
+"""
+
+st.sidebar.title("About")
+st.sidebar.markdown(markdown)
+st.sidebar.image("data/COMBINE_logo.jpg")
+
 st.markdown(
     "<h1 style='text-align: center; color: #78bc1e;'>AMR-KG Database</h1>",
     unsafe_allow_html=True,
@@ -27,6 +46,10 @@ st.markdown(
 
     a[href] {
         color: #1e85bc;
+    }
+
+    sidebar .sidebar-content {
+        background-color: #111 !important;
     }
 
     [data-testid="column"]:nth-child(1){background-color: #78bc1e;}
@@ -183,7 +206,5 @@ st.download_button(
 )
 
 # Publucation note
-# with st.expander("Check out our publication for more deatils "):
-# st.write(
-#     """"""
-# )
+with st.expander("Check out our publication for more deatils "):
+    st.write("""Manuscript in preparation. Please check back soon for more details.""")
