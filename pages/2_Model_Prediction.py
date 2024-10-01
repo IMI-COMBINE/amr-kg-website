@@ -1,5 +1,6 @@
 # Description: This file contains the code for model prediction.
 
+import datetime
 import logging
 import pandas as pd
 import streamlit as st
@@ -26,7 +27,7 @@ st.set_page_config(
 )
 
 st.markdown(
-    "<h1 style='text-align: center; color: #78bc1e;'>Chemical - Strain activity prediction</h1>",
+    "<h1 style='text-align: center; color: #006c8b;'>Chemical - Strain activity prediction</h1>",
     unsafe_allow_html=True,
 )
 
@@ -163,7 +164,7 @@ if st.button("Predict"):
         # Canonicalize the smiles
         try:
             can_smiles = CanonSmiles(smiles)
-        except Exception as e:
+        except Exception:
             can_smiles = smiles
 
         # Generate the mol object
@@ -216,3 +217,19 @@ if st.button("Predict"):
     smiles_df_subset["Probability"] = probs
 
     st.dataframe(smiles_df_subset[["smiles", "Prediction", "Probability"]])
+
+# last updated
+date = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+st.markdown(
+    f"<p style='text-align: center;'>Last updated: {date}</p>",
+    unsafe_allow_html=True,
+)
+
+# footer with text and green background
+st.markdown(
+    "<footer style='background-color: #006c8b; padding: 10px; border-radius: 10px;'>"
+    "<p style='color: white; text-align: center;'>Fraunhofer ITMP © 2021</p>"
+    "<p style='color: white;'>This project has received funding from the Innovative Medicines Initiative 2 Joint Undertaking under Grant Agreement No 853967. This Joint Undertaking receives support from the European Union’s Horizon 2020 research and innovation programme and EFPIA companies’ in kind contribution.</p>"
+    "</footer>",
+    unsafe_allow_html=True,
+)

@@ -1,3 +1,4 @@
+import datetime
 import pandas as pd
 from collections import defaultdict
 import streamlit as st
@@ -30,7 +31,7 @@ st.sidebar.markdown(markdown)
 st.sidebar.image("data/COMBINE_logo.jpg")
 
 st.markdown(
-    "<h1 style='text-align: center; color: #78bc1e;'>AMR-KG Database</h1>",
+    "<h1 style='text-align: center; color: #006c8b;'>AMR-KG Database</h1>",
     unsafe_allow_html=True,
 )
 st.markdown(
@@ -68,10 +69,10 @@ st.header(
     help="Information on the data in AMR-KG.",
 )
 
-st.write(
+st.markdown(
     "Antimicrobial Resistant Knowledge Graph (AMR-KG) is an exhaustive data warehouse of experimentally validated antibacterial chemicals \
     covering Gram-positive, Gram-negative, acid-fast bacteria and fungi. The construction of the AMR-KG involved collecting \
-    minimum inhibitory concentration (MIC) data from three different public data resources:"
+    [minimum inhibitory concentration (MIC)](http://purl.obolibrary.org/obo/ARO_3004370) data from three different public data resources:"
 )
 
 
@@ -82,7 +83,7 @@ with col[0]:
     container.write("### [ChEMBL](https://www.ebi.ac.uk/chembl/)")
 
     container.write(
-        "ChEMBL is a manually curated database of bioactive molecules with drug-like properties. \
+        "ChEMBL (v.34) is a manually curated database of bioactive molecules with drug-like properties. \
         It brings together chemical and bioactivity to aid the translation of experimental information into effective new drugs.",
     )
 
@@ -109,7 +110,7 @@ st.header(
     divider="orange",
     help="Stats on the underlying data.",
 )
-df = pd.read_csv("data/processed/combined_bioassay_data.tsv", sep="\t")
+df = pd.read_csv("data/combined_bioassay_data.tsv", sep="\t")
 
 
 def get_base_stats():
@@ -138,19 +139,20 @@ def get_base_stats():
             _,
             _,
             _,
+            gp_class,
+            gn_class,
+            fungi_class,
+            af_class,
             best_class,
         ) = row
 
-        if best_class == "gram-positive":
+        if pd.notna(gp_class):
             pchem_dist_dict["gram-positive"].append(gram_pos)
-
-        elif best_class == "gram-negative":
+        if pd.notna(gn_class):
             pchem_dist_dict["gram-negative"].append(gram_neg)
-
-        elif best_class == "fungi":
+        if pd.notna(fungi_class):
             pchem_dist_dict["fungi"].append(fungi)
-
-        elif best_class == "acid-fast":
+        if pd.notna(af_class):
             pchem_dist_dict["acid-fast"].append(acid_fast)
 
     return (chembl_cmpds, coadd_cmpds, spark_cmpds), pchem_dist_dict
@@ -162,12 +164,22 @@ fig = plt.figure(figsize=(15, 10))
 
 plt.subplot(2, 2, 1)
 plt.bar(
-    ["ChEMBL", "CO-ADD", "SPARK"],
-    [len(chembl_cmpds), len(coadd_cmpds), len(spark_cmpds)],
+    [
+        "ChEMBL",
+        "SPARK",
+        "CO-ADD",
+    ],
+    [len(chembl_cmpds), len(spark_cmpds), len(coadd_cmpds)],
 )
-plt.title("Compound distribution across resources")
+plt.title("Compound distribution across resources", fontsize=15, fontweight="bold")
 plt.yscale("log")
-plt.ylabel("Number of compounds")
+# display the number of compounds on the bars
+for i, v in enumerate([len(chembl_cmpds), len(spark_cmpds), len(coadd_cmpds)]):
+    plt.text(i, v + 10, str(v), ha="center", va="bottom")
+plt.ylabel("Number of deduplicated compounds", fontsize=12)
+plt.xlabel("Data source", fontsize=12)
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
 
 plt.subplot(2, 2, 2)
 plt.hist(
@@ -178,10 +190,13 @@ plt.hist(
 )
 plt.hist(pchem_dist_dict["fungi"], alpha=0.5, color="green", label="fungi")
 plt.hist(pchem_dist_dict["acid-fast"], alpha=0.5, color="orange", label="acid-fast")
-plt.legend()
-plt.title("Distribution of pChEMBL values")
-plt.ylabel("Number of compounds")
-plt.xlabel("pChEMBL value")
+plt.axvline(5, color="red", linestyle="--", label="pChEMBL threshold")
+plt.legend(title="Pathogen class", fontsize=12)
+plt.title("Distribution of pChEMBL values", fontsize=15, fontweight="bold")
+plt.ylabel("Number of deduplicated compounds", fontsize=12)
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
+plt.xlabel("pChEMBL value", fontsize=12)
 
 st.pyplot(fig)
 
@@ -189,7 +204,7 @@ st.pyplot(fig)
 st.header(
     ":arrow_down: Data Download",
     divider="orange",
-    help="Downloading all the data in the AMR-KG.",
+    help="Downloading the compound-pathogen data in AMR-KG.",
 )
 
 
@@ -200,11 +215,49 @@ def convert_df(df):
 
 csv = convert_df(df)
 st.write("The data files contains the following columns in the tab-seperated manner:")
+st.markdown(
+    """
+    * `compound_inchikey` - InChI key of the compound \n
+    * `compound_smiles` - SMILES representation of the compound \n
+    * `compound_source` - Source database of the compound \n
+    * `gram_positive` - pMIC value for compound activity against Gram-positive pathogen \n
+    * `gram_negative` - pMIC value for compound activity against Gram-negative pathogen \n
+    * `fungi` - pMIC value for compound activity against fungi \n
+    * `acid_fast` - pMIC value for compound activity against acid-fast pathogen \n
+    * `chemical_class` - Chemical class disitribution of the compounds based on NPClassifier \n
+    * `compound_superclass` - Superclass of the compound based on NPClassifier \n
+    * `compound_pathway` - Pathway of the compound based on NPClassifier \n
+    * `gram_positive_label` - Indicating whether a compound is active or inactive for a Gram-positive pathogen based on pChEMBL threshold (i.e. 5) \n
+    * `gram_negative_label` - Indicating whether a compound is active or inactive for a Gram-negative pathogen based on pChEMBL threshold (i.e. 5) \n
+    * `fungi_label` - Indicating whether a compound is active or inactive for a Fungi pathogen based on pChEMBL threshold (i.e. 5) \n
+    * `acid_fast_label` - Indicating whether a compound is active or inactive for a Acid-fast pathogen based on pChEMBL threshold (i.e. 5) \n
+    * `best_class` - Pathogen class of the compound based on the highest pChEMBL values \n
+    """
+)
 st.dataframe(df.head(3))
 st.download_button(
     "Press to Download", csv, "amrkg_data_dump.tsv", "text/tsv", key="download-tsv"
 )
 
 # Publucation note
-with st.expander("Check out our publication for more deatils "):
+with st.expander(
+    "If you have found our resource or model useful in your work, please consider citing us: "
+):
     st.write("""Manuscript in preparation. Please check back soon for more details.""")
+
+
+# last updated
+date = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+st.markdown(
+    f"<p style='text-align: center;'>Last updated: {date}</p>",
+    unsafe_allow_html=True,
+)
+
+# footer with text and green background
+st.markdown(
+    "<footer style='background-color: #006c8b; padding: 10px; border-radius: 10px;'>"
+    "<p style='color: white; text-align: center;'>Fraunhofer ITMP © 2021</p>"
+    "<p style='color: white;'>This project has received funding from the Innovative Medicines Initiative 2 Joint Undertaking under Grant Agreement No 853967. This Joint Undertaking receives support from the European Union’s Horizon 2020 research and innovation programme and EFPIA companies’ in kind contribution.</p>"
+    "</footer>",
+    unsafe_allow_html=True,
+)
