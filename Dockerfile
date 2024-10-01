@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     software-properties-common
 
 # Copy code and start script (this will place the files in home/username/)
+COPY .streamlit $HOME/kg/.streamlit
 COPY requirements.txt $HOME/kg/requirements.txt
 COPY pages $HOME/kg/pages/
 COPY AMR-KG_Database.py $HOME/kg/AMR-KG_Database.py
