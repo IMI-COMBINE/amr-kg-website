@@ -28,12 +28,12 @@ COPY start-script.sh $HOME/kg/start-script.sh
 RUN mkdir $HOME/kg/models
 
 RUN apt-get install curl -y
-# RUN curl  https://zenodo.org/api/records/12514684/files/chem_phys_rf.pkl/content -o $HOME/kg/models/chem_phys_rf.pkl -L
-RUN curl  https://zenodo.org/api/records/12514684/files/ecfp4_rf.pkl/content -o $HOME/kg/models/ecfp4_rf.pkl
-RUN curl  https://zenodo.org/api/records/12514684/files/erg_rf.pkl/content -o $HOME/kg/models/erg_rf.pkl
-RUN curl  https://zenodo.org/api/records/12514684/files/maccs_rf.pkl/content -o $HOME/kg/models/maccs_rf.pkl
-RUN curl  https://zenodo.org/api/records/12514684/files/mhfp6_rf.pkl/content -o $HOME/kg/models/mhfp6_rf.pkl
-RUN curl  https://zenodo.org/api/records/12514684/files/rdkit_rf.pkl/content -o $HOME/kg/models/rdkit_rf.pkl
+# RUN curl  https://zenodo.org/api/records/13868088/files/chem_phys_rf.pkl/content -o $HOME/kg/models/chem_phys_rf.pkl -L
+RUN curl  https://zenodo.org/api/records/13868088/files/ecfp4_rf.pkl/content -o $HOME/kg/models/ecfp4_rf.pkl
+RUN curl  https://zenodo.org/api/records/13868088/files/erg_rf.pkl/content -o $HOME/kg/models/erg_rf.pkl
+RUN curl  https://zenodo.org/api/records/13868088/files/maccs_rf.pkl/content -o $HOME/kg/models/maccs_rf.pkl
+RUN curl  https://zenodo.org/api/records/13868088/files/mhfp6_rf.pkl/content -o $HOME/kg/models/mhfp6_rf.pkl
+RUN curl  https://zenodo.org/api/records/13868088/files/rdkit_rf.pkl/content -o $HOME/kg/models/rdkit_rf.pkl
 
 RUN pip install --no-cache-dir -r requirements.txt \
     && chmod +x start-script.sh \
