@@ -13,7 +13,7 @@ st.set_page_config(
 
 # Customize sidebar
 markdown = """
-**Info**: This is AMR-KG repository and the broad-spectrum prediction models trained on the datasets.
+**Info**: This is AntiMicrobial-KG repository and the broad-spectrum prediction models trained on the datasets.
 
 **Developers**:
 * [Yojana Gadiya](https://orcid.org/0000-0002-7683-0452)
@@ -31,7 +31,7 @@ st.sidebar.markdown(markdown)
 st.sidebar.image("data/COMBINE_logo.jpg")
 
 st.markdown(
-    "<h1 style='text-align: center; color: #006c8b;'>AMR-KG Database</h1>",
+    "<h1 style='text-align: center; color: #006c8b;'>AntiMicRobial-KG Database</h1>",
     unsafe_allow_html=True,
 )
 st.markdown(
@@ -70,7 +70,7 @@ st.header(
 )
 
 st.markdown(
-    "Antimicrobial Resistant Knowledge Graph (AMR-KG) is an exhaustive data warehouse of experimentally validated antibacterial chemicals \
+    "AntiMicRobial Knowledge Graph (AMR-KG) is an exhaustive data warehouse of experimentally validated antibacterial chemicals \
     covering Gram-positive, Gram-negative, acid-fast bacteria and fungi. The construction of the AMR-KG involved collecting \
     [minimum inhibitory concentration (MIC)](http://purl.obolibrary.org/obo/ARO_3004370) data from three different public data resources:"
 )
