@@ -243,11 +243,13 @@ st.download_button(
 with st.expander(
     "If you have found our resource or model useful in your work, please consider citing us: "
 ):
-    st.write("""Manuscript in preparation. Please check back soon for more details.""")
+    st.markdown(
+        """Gadiya, Y., Genilloud, O., Bilitewski, U., Brönstrup, M., von Berlin, L., Attwood, M., Gribbon, P. and Zaliani, A.. Predicting antimicrobial class specificity of small molecules using machine learning. *Journal of Chemical Information and Modeling* 2025, 65, 5, 2416–2431. DOI: [10.1021/acs.jcim.4c02347](https://doi.org/10.1021/acs.jcim.4c02347)."""
+    )
 
 
 # last updated
-date = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+date = "24-03-2025 08:31:58"
 st.markdown(
     f"<p style='text-align: center;'>Last updated: {date}</p>",
     unsafe_allow_html=True,

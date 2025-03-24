@@ -97,7 +97,7 @@ else:
     st.write(f"Found :green[{df_scaffold.shape[0]}] compounds with the same scaffold.")
 
 # last updated
-date = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+date = "24-03-2025 08:31:58"
 st.markdown(
     f"<p style='text-align: center;'>Last updated: {date}</p>",
     unsafe_allow_html=True,
