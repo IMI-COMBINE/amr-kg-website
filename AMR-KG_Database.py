@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(
     layout="wide",
-    page_title="AMR-KG",
+    page_title="AntiMicrobial-KG",
     page_icon=":microscope:",
     initial_sidebar_state="auto",
 )
@@ -31,7 +31,7 @@ st.sidebar.markdown(markdown)
 st.sidebar.image("data/COMBINE_logo.jpg")
 
 st.markdown(
-    "<h1 style='text-align: center; color: #006c8b;'>AntiMicRobial-KG Database</h1>",
+    "<h1 style='text-align: center; color: #006c8b;'>AntiMicrobial-KG Database</h1>",
     unsafe_allow_html=True,
 )
 st.markdown(
@@ -66,12 +66,12 @@ st.markdown(
 st.header(
     "ℹ️ About the resources",
     divider="orange",
-    help="Information on the data in AMR-KG.",
+    help="Information on the data in AntiMicrobial-KG.",
 )
 
 st.markdown(
-    "AntiMicRobial Knowledge Graph (AMR-KG) is an exhaustive data warehouse of experimentally validated antibacterial chemicals \
-    covering Gram-positive, Gram-negative, acid-fast bacteria and fungi. The construction of the AMR-KG involved collecting \
+    "The AntiMicrobial Knowledge Graph (KG) is an exhaustive data warehouse of experimentally validated antibacterial chemicals \
+    covering Gram-positive, Gram-negative, acid-fast bacteria and fungi. The construction of the AntiMicrobial-KG involved collecting \
     [minimum inhibitory concentration (MIC)](http://purl.obolibrary.org/obo/ARO_3004370) data from three different public data resources:"
 )
 
@@ -204,7 +204,7 @@ st.pyplot(fig)
 st.header(
     ":arrow_down: Data Download",
     divider="orange",
-    help="Downloading the compound-pathogen data in AMR-KG.",
+    help="Downloading the compound-pathogen data in AntiMicrobial-KG.",
 )
 
 
