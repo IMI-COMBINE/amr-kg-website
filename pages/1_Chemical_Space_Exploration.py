@@ -1,4 +1,4 @@
-# Description: This file contains the code to display the TMAP of the chemicals in AMR-KG.
+# Description: This file contains the code to display the TMAP of the chemicals in AntiMicrobial-KG.
 
 import datetime
 import pandas as pd
@@ -10,20 +10,20 @@ from rdkit.Chem import CanonSmiles, MolFromSmiles, MolToInchiKey
 
 st.set_page_config(
     layout="wide",
-    page_title="AMR-KG",
+    page_title="AntiMicrobial-KG",
     page_icon=":microscope:",
     initial_sidebar_state="auto",
 )
 
 st.markdown(
-    "<h1 style='text-align: center; color: #006c8b;'>AMR-KG Chemical Space Exploration</h1>",
+    "<h1 style='text-align: center; color: #006c8b;'>AntiMicrobial-KG Chemical Space Exploration</h1>",
     unsafe_allow_html=True,
 )
 
 st.header(
-    "🔍 TMAP of the chemicals in AMR-KG Database",
+    "🔍 TMAP of the chemicals in AntiMicrobial-KG Database",
     divider="orange",
-    help="TMAP distribution of compounds in AMR-KG.",
+    help="TMAP distribution of compounds in AntiMicrobial-KG.",
 )
 
 
@@ -48,7 +48,7 @@ st.markdown(
 
 
 st.markdown(
-    """Explore the chemical space of the AMR-KG database using the interactive [TMAP](https://tmap.gdb.tools/) below. \
+    """Explore the chemical space of the AntiMicrobial-KG database using the interactive [TMAP](https://tmap.gdb.tools/) below. \
     The TMAP is a 2D representation of the chemical space of the compounds in the database. \
     Each point represents a compound, and the distance between points indicates the similarity between compounds. \
     You can zoom in, pan, and hover over the points to view the compound structure."""
