@@ -62,7 +62,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# AMR-KG Description
+# AntiMicrobial-KG Description
 st.header(
     "ℹ️ About the resources",
     divider="orange",
