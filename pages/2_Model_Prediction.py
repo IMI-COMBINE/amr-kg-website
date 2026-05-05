@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 st.set_page_config(
     layout="wide",
-    page_title="AMR-KG",
+    page_title="AntiMicrobial-KG",
     page_icon=":microscope:",
     initial_sidebar_state="auto",
 )
