@@ -6,7 +6,7 @@ WORKDIR $HOME/kg
 COPY .streamlit $HOME/kg/.streamlit
 COPY requirements.txt $HOME/kg/requirements.txt
 COPY pages $HOME/kg/pages/
-COPY Anitmicrobial-KG_Database.py $HOME/kg/Anitmicrobial-KG_Database.py
+COPY Antimicrobial-KG_Database.py $HOME/kg/Antimicrobial-KG_Database.py
 COPY data $HOME/kg/data/
 COPY amrkg_chemspace.html $HOME/kg/amrkg_chemspace.html
 COPY start-script.sh $HOME/kg/start-script.sh
